@@ -2,7 +2,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
+const programRoutes = require('./routes/programRoutes');
 const User = require('./models/User'); // Importar el modelo de usuario
+const Program = require('./models/Program');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -19,6 +21,9 @@ app.use(express.json());
 
 // Usar las rutas de usuario
 app.use('/api/users', userRoutes);
+
+//Usar las rutas de programas
+app.use('/api/programs', programRoutes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {
