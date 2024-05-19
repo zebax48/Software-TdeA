@@ -14,7 +14,6 @@ const authMiddleware = async (req, res, next) => {
  
         // Verificar si el token está en la lista de tokens revocados
         const revokedToken = await RevokedToken.findOne({ token });
-        console.log('RT EN MD:', revokedToken);
         if (revokedToken) {
             return res.status(401).json({ message: 'Token revocado' });
         }

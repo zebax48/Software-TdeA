@@ -8,6 +8,6 @@ const programaSchema = new mongoose.Schema({
     registroCalificado: { type: String, required: false }
 });
 
-const Programa = mongoose.model('Programa', programaSchema);
+const Programa = mongoose.model('Programa', programaSchema, 'programas');
 
 module.exports = Programa;

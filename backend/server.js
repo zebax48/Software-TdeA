@@ -3,8 +3,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
 const programRoutes = require('./routes/programRoutes');
-const User = require('./models/User'); // Importar el modelo de usuario
+const resultadoAprendizajeRoutes = require('./routes/resultadoAprendizajeRoutes');
+const User = require('./models/User');
 const Program = require('./models/Program');
+const ResultadoAprendizaje = require('./models/ResultadoAprendizaje');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -24,6 +26,9 @@ app.use('/api/users', userRoutes);
 
 //Usar las rutas de programas
 app.use('/api/programs', programRoutes);
+
+// Usar las rutas de resultados de aprendizaje
+app.use('/api/ra', resultadoAprendizajeRoutes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {
