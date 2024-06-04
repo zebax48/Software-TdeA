@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
 const programRoutes = require('./routes/programRoutes');
 const resultadoAprendizajeRoutes = require('./routes/resultadoAprendizajeRoutes');
+const pruebaRoutes = require('./routes/pruebaRoutes');
 const User = require('./models/User');
 const Program = require('./models/Program');
 const ResultadoAprendizaje = require('./models/ResultadoAprendizaje');
@@ -29,6 +30,9 @@ app.use('/api/programs', programRoutes);
 
 // Usar las rutas de resultados de aprendizaje
 app.use('/api/ra', resultadoAprendizajeRoutes);
+
+// Usar las rutas de pruebas
+app.use('/api/pruebas', pruebaRoutes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {
