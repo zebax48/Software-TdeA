@@ -13,7 +13,8 @@ const {
     updatePrueba,
     loadStudentsWithGradesToPrueba,
     updateStudentInPrueba,
-    deleteStudentFromPrueba
+    deleteStudentFromPrueba,
+    deletePrueba
 } = require('../controllers/pruebaController');
 
 const router = express.Router();
@@ -62,5 +63,8 @@ router.post('/test-read-excel', upload.single('file'), testReadExcel);
 
 // Ruta para obtener los promedios de los resultados de aprendizaje de un programa
 router.get('/promedios/:programId', getPromediosPorPrograma);
+
+// Ruta para eliminar una prueba
+router.delete('/delete/:pruebaId', deletePrueba)
 
 module.exports = router;

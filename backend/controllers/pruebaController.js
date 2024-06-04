@@ -375,5 +375,6 @@ module.exports = {
     updatePrueba,
     loadStudentsWithGradesToPrueba,
     updateStudentInPrueba,
-    deleteStudentFromPrueba
+    deleteStudentFromPrueba,
+    deletePrueba
 };
