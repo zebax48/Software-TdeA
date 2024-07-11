@@ -1,0 +1,37 @@
+import React from 'react';
+import './App.css';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Login from './Login';
+import Register from './Register';
+import Recover from './Recover';
+import Dashboard from './Dashboard';
+import AdminUsers from './AdminUsers';
+import AdminPrograms from './components/Programs/AdminPrograms';
+import { AuthProvider, AuthContext } from './AuthContext';
+import PrivateRoute from './PrivateRoute';
+import EditUser from './components/Users/EditUser';
+import EditProgram from './components/Programs/EditProgram';
+import CreateProgram from './components/Programs/CreateProgram';
+
+const App = () => {
+  return (
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/recover" element={<Recover />} />
+          <Route path="/dashboard" element={<PrivateRoute component={ Dashboard } />} />
+          <Route path="/users" element={<PrivateRoute component={ AdminUsers } />} />
+          <Route path="/edit-user/:username" element={<PrivateRoute component={ EditUser } />} />
+          <Route path="/programas" element={<PrivateRoute component={ AdminPrograms } />} />
+          <Route path="/crear-programa" element={<PrivateRoute component={ CreateProgram } />} />
+          <Route path="/edit-program/:programId" element={<PrivateRoute component={ EditProgram } />} />
+          <Route path="/" element={<Navigate to="/login" />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
+};
+
+export default App;

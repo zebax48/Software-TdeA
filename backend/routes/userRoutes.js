@@ -2,8 +2,7 @@
 const express = require('express');
 const User = require('../models/User');
 const router = express.Router();
-const { registerUser, loginUser, updateUser, deleteUser, getAllUsers, logoutUser } = require('../controllers/userController');
-const auth = require('../middleware/authMiddleware.js');
+const { registerUser, loginUser, updateUser, deleteUser, getAllUsers, logoutUser, getUser } = require('../controllers/userController');
 const { generateRandomPassword, updateUserPassword } = require('../controllers/userController.js');
 const { sendNewPasswordEmail } = require('../emailService');
 const authMiddleware = require('../middleware/authMiddleware.js');
@@ -55,6 +54,7 @@ router.post('/forgot-password', async (req, res) => {
 });
 
 router.use(authMiddleware);
+
 // Ruta para actualizar información de usuario
 router.put('/update/:username', updateUser);
 
@@ -66,5 +66,8 @@ router.get('/logout/:username', logoutUser);
 
 // Ruta para obtener todos los usuarios
 router.get('/', getAllUsers);
+
+//Ruta para obtener un usuario
+router.get('/:username', getUser)
 
 module.exports = router;

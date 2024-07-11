@@ -1,6 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
+const authMiddleware = require('../middleware/authMiddleware.js');
 
 const { 
     createPrueba, 
@@ -18,6 +19,8 @@ const {
 } = require('../controllers/pruebaController');
 
 const router = express.Router();
+
+router.use(authMiddleware);
 
 // Configuración de multer
 const storage = multer.diskStorage({

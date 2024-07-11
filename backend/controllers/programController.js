@@ -57,7 +57,7 @@ const updateProgram = async (req, res) => {
         }
 
         // Verificar si ya existe un programa con el mismo nombre
-        const existingProgram = await Program.findOne({ nombre, registroCalificado });
+        const existingProgram = await Program.findOne({ facultad, nombre, semestres, registroCalificado });
     
         if (existingProgram) {
             return res.status(400).json({ message: 'Ya existe este programa' });

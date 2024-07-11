@@ -7,7 +7,7 @@ const RevokedToken = require('../models/RevokedToken');
 // Controlador para registrar un nuevo usuario
 const registerUser = async (req, res) => {
     console.log(req.body); // Imprimir el cuerpo de la solicitud en la consola
-    const { username, password, nombres, apellidos, celular, correo, role } = req.body;
+    const { username, cc, password, nombres, apellidos, celular, correo, role } = req.body;
 
     try {
         // Verificar si el usuario ya existe
@@ -20,6 +20,7 @@ const registerUser = async (req, res) => {
         // Crear un nuevo usuario con ID generado automáticamente
         user = new User({
             username,
+            cc,
             password,
             nombres,
             apellidos,
@@ -39,6 +40,27 @@ const registerUser = async (req, res) => {
     } catch (error) {
         console.error(error.message);
         res.status(500).send('Error del servidor');
+    }
+};
+
+// Obtener un usuario por su nombre de usuario
+const getUser = async (req, res) => {
+    const username = req.params.username;
+
+    try {
+        // Buscar el usuario por su nombre de usuario en la base de datos
+        const user = await User.findOne({ username });
+
+        // Verificar si se encontró el usuario
+        if (!user) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        // Enviar el usuario como respuesta
+        res.json(user);
+    } catch (error) {
+        console.error('Error al obtener usuario:', error);
+        res.status(500).json({ error: 'Error al obtener usuario' });
     }
 };
 
@@ -75,7 +97,15 @@ const loginUser = async (req, res) => {
         // Establecer el token como una cookie de sesión
         res.cookie('token', token, { httpOnly: true });
         
-        res.json({ token });
+        res.json({ 
+            token,
+            username: user.username,
+            cc: user.cc,
+            nombres: user.nombres,
+            apellidos: user.apellidos,
+            celular: user.celular,
+            correo: user.correo,
+            role: user.role});
     } catch (error) {
         console.error(error.message);
         res.status(500).send('Error del servidor');
@@ -110,6 +140,8 @@ const logoutUser = async (req, res) => {
         res.clearCookie('token');
 
         res.json({ message: 'Sesión cerrada exitosamente' });
+        // Mensaje cerrar sesión
+        console.log('Sesión cerrada exitosamente');
     } catch (error) {
         console.error('Error al cerrar sesión:', error);
         res.status(500).json({ error: 'Error al cerrar sesión' });
@@ -119,7 +151,7 @@ const logoutUser = async (req, res) => {
 // Controlador para actualizar usuario
 const updateUser = async (req, res) => {
     const username = req.params.username; 
-    const { newUsername, newPassword, newNombres, newApellidos, newCelular, newCorreo, newRole } = req.body;
+    const { newUsername, newCc, newPassword, newNombres, newApellidos, newCelular, newCorreo, newRole } = req.body;
 
     try {
         let user = await User.findOne({ username });
@@ -129,6 +161,7 @@ const updateUser = async (req, res) => {
         }
 
         user.username = newUsername;
+        user.cc = newCc,
         user.nombres = newNombres;
         user.apellidos = newApellidos;
         user.celular = newCelular;
@@ -216,5 +249,6 @@ module.exports = {
     deleteUser,
     getAllUsers,
     generateRandomPassword,
-    updateUserPassword
+    updateUserPassword,
+    getUser
 };
