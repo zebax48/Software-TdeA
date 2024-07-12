@@ -47,8 +47,10 @@ const Sidebar = ({ isOpen }) => {
         <a href='/programas'>
             <li className='sidebar-item'>Programas</li>
         </a>
+        <a href='/ra'>
+           <li className='sidebar-item'>Resultados de Aprendizaje</li>
+        </a>
         
-        <li className='sidebar-item'>Resultados de Aprendizaje</li>
         <li className='sidebar-item'>Pruebas</li>
       </ul>
     </div>

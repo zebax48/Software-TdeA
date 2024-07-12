@@ -9,7 +9,7 @@ const xlsx = require('xlsx');
 
 // Crear una nueva prueba
 const createPrueba = async (req, res) => {
-    const { programId, raId, userId, descripcion } = req.body;
+    const { programId, raId, userId, semestre, descripcion } = req.body;
 
     try {
         const program = await Program.findById(programId);
@@ -31,6 +31,7 @@ const createPrueba = async (req, res) => {
             programa: programId,
             resultadoAprendizaje: raId,
             usuario: userId,
+            semestre: semestre,
             descripcion: descripcion,
             estudiantes: [],
         });
@@ -251,12 +252,12 @@ const getPruebaById = async (req, res) => {
 // Actualizar un resultado de aprendizaje por su ID
 const updatePrueba = async (req, res) => {
     const { pruebaId } = req.params;
-    const { programa, resultadoAprendizaje, usuario, descripcion } = req.body;
+    const { programa, resultadoAprendizaje, usuario, semestre, descripcion } = req.body;
 
     try {
         const prueba = await Prueba.findByIdAndUpdate(
             pruebaId,
-            { programa, resultadoAprendizaje, usuario, descripcion },
+            { programa, resultadoAprendizaje, usuario, semestre, descripcion },
             { new: true, runValidators: true }
         );
 

@@ -29,6 +29,8 @@ const Register = () => {
     }
     try {
       await register({ username, cc, password, nombres, apellidos, celular, correo, role });
+      window.alert("Usuario creado exitosamente");
+      navigate('/users'); 
     }catch (error) {
       if (error.response && error.response.status === 401) {
         window.alert("La sesión caducó, debes iniciar sesión nuevamente");

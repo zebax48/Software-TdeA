@@ -12,6 +12,7 @@ const pruebaSchema = new mongoose.Schema({
     usuario: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     descripcion: { type: String, required: true },
     estudiantes: [estudianteSchema],
+    semestre: { type: String, required: true },
     promedio: { type: Number, default: 0 },
 });
 

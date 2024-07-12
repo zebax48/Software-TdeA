@@ -82,6 +82,7 @@ const AdminPrograms = () => {
   return (
     <Layout>
       <div className="admin-users">
+      <h1>Programas</h1>
         <button onClick={() => navigate('/crear-programa')}>Crear Programa</button>
         <table>
           <thead>

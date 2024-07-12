@@ -88,6 +88,7 @@ const AdminUsers = () => {
   return (
     <Layout>
       <div className="admin-users">
+      <h1>Usuarios</h1>
         <button onClick={() => navigate('/register')}>Crear Usuario</button>
         <table>
           <thead>

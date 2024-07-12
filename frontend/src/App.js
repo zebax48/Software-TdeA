@@ -12,6 +12,9 @@ import PrivateRoute from './PrivateRoute';
 import EditUser from './components/Users/EditUser';
 import EditProgram from './components/Programs/EditProgram';
 import CreateProgram from './components/Programs/CreateProgram';
+import ListRA from './components/RA/ListRA';
+import CreateRA from './components/RA/CreateRA';
+import EditRA from './components/RA/EditRA';
 
 const App = () => {
   return (
@@ -27,6 +30,9 @@ const App = () => {
           <Route path="/programas" element={<PrivateRoute component={ AdminPrograms } />} />
           <Route path="/crear-programa" element={<PrivateRoute component={ CreateProgram } />} />
           <Route path="/edit-program/:programId" element={<PrivateRoute component={ EditProgram } />} />
+          <Route path="/ra" element={<PrivateRoute component={ ListRA } />} />
+          <Route path="/crear-ra" element={<PrivateRoute component={ CreateRA } />} />
+          <Route path="/editar-ra/:raId" element={<PrivateRoute component={ EditRA } />} />
           <Route path="/" element={<Navigate to="/login" />} />
         </Routes>
       </Router>
